@@ -16,7 +16,7 @@ $(function() {
     .appendTo('.entries');
 
 
-  $('.add_entry').click(function() {
+  $('.add_entry_submit').click(function() {
     View('entry')
       .time('1pm')
       .location('Carnegie Mellon University')

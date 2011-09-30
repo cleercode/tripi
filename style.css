@@ -112,15 +112,37 @@ li.entry:nth-child(odd) {
 }
 
 .add_entry {
+  overflow: hidden;
+}
+
+.add_entry_input {
+  background: white url(images/search.png) 10px 13px no-repeat;
+  border: 1px solid #ccc;
+  float: left;
+  font: 16px/1 "Helvetica Neue", Arial, Helvetica, sans-serif;
+  padding: 10px 10px 10px 36px;
+  width: 448px;
+  height: 20px;
+}
+
+.add_entry_input:focus {
+  border-color: #f2ab00;
+  outline: none;
+}
+
+.add_entry_submit {
   background: #aaa;
   border-radius: 5px;
   color: white;
-  display: inline-block;
+  float: left;
   font-weight: bold;
+  margin-left: 10px;
   padding: 10px;
   text-decoration: none;
+  width: 70px;
+  height: 22px;
 }
 
-.add_entry:hover {
-  background: blue;
+.add_entry_submit:hover {
+  background: #f2ab00;
 }
