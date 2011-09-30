@@ -45,7 +45,7 @@ table {
 body {
   background: #f4f4f4 url(images/cubes.png);
   color: #444;
-  font: 16px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font: 16px/1.5 Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
   padding: 20px;
 }
 
@@ -137,7 +137,7 @@ li.entry:nth-child(odd) {
   background: white url(images/search.png) 10px 13px no-repeat;
   border: 1px solid #ccc;
   float: left;
-  font: 16px/1 "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font: 16px/1 Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
   padding: 10px 10px 10px 36px;
   width: 432px;
   height: 20px;
