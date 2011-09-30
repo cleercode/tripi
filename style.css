@@ -49,6 +49,12 @@ body {
   padding: 20px;
 }
 
+a {
+  border-bottom: 1px solid #ccc;
+  color: #ff5f00;
+  text-decoration: none;
+}
+
 header {
   margin: 20px auto;
   width: 600px;
@@ -193,4 +199,11 @@ li.entry:nth-child(odd) {
   border-radius: 3px;
   font-size: 12px;
   padding: 10px;
+}
+
+footer {
+  font-size: 12px;
+  margin: 40px auto 20px;
+  text-align: center;
+  width: 960px;
 }
