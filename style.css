@@ -81,9 +81,16 @@ header .logo {
 }
 
 h1 {
+  border-bottom: 1px dotted #ccc;
   font-size: 36px;
   font-weight: lighter;
   margin-bottom: 24px;
+  padding: 5px 10px;
+}
+
+h1:focus {
+  border-color: #f2ab00;
+  outline: none;
 }
 
 ul.entries {
@@ -162,6 +169,10 @@ li.entry:nth-child(odd) {
   float: left;
   padding: 20px;
   width: 300px;
+}
+
+#sidebar h1 {
+  font-size: 24px;
 }
 
 #sidebar img {
