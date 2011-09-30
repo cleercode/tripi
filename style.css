@@ -1,0 +1,126 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+body {
+  background: #204c7f;
+  color: #444;
+  font: 16px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+  padding: 20px;
+}
+
+header {
+  margin: 20px auto;
+  width: 600px;
+}
+
+header span {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  text-shadow: 0 2px 1px rgba(0, 0, 0, 0.5)
+}
+
+#content {
+  background: #fafafa;
+  border-radius: 10px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  margin: 0 auto;
+  padding: 20px;
+  width: 600px;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: lighter;
+  margin-bottom: 24px;
+}
+
+ul.entries {
+  margin-bottom: 20px;
+}
+
+li.entry {
+  border-top: 1px solid #ccc;
+  overflow: hidden;
+  padding: 10px 0;
+}
+
+li.entry:nth-child(odd) {
+  background: #eee;
+}
+
+.time {
+  float: left;
+  padding: 5px 10px;
+  width: 80px;
+}
+
+.time span {
+  border-bottom: 1px dotted #ccc;  
+}
+
+.location {
+  float: left;
+  padding: 5px 10px;
+  width: 480px;
+}
+
+.location span {
+  border-bottom: 1px dotted #ccc;
+  font-weight: bold;
+}
+
+.add_entry {
+  background: #aaa;
+  border-radius: 5px;
+  color: white;
+  display: inline-block;
+  font-weight: bold;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.add_entry:hover {
+  background: blue;
+}
