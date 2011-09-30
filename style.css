@@ -43,7 +43,7 @@ table {
 }
 
 body {
-  background: #204c7f;
+  background: #ddd;
   color: #444;
   font: 16px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
   padding: 20px;
@@ -54,11 +54,12 @@ header {
   width: 600px;
 }
 
-header span {
-  color: white;
-  font-size: 24px;
-  font-weight: bold;
-  text-shadow: 0 2px 1px rgba(0, 0, 0, 0.5)
+header .logo {
+  background: url(images/logo.png);
+  text-indent: -9999px;
+  margin: 0 auto;
+  width: 155px;
+  height: 120px;
 }
 
 #content {
