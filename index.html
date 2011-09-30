@@ -5,7 +5,7 @@
   <link rel="stylesheet" type="text/css" href="style.css" media="all">
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
   <script type="text/javascript" src="scripts/events.js"></script>
-  <script type="text/javascript" src="scripts/caustic.min.js"></script>
+  <script type="text/javascript" src="scripts/caustic.js"></script>
   <script type="text/javascript" src="scripts/main.js"></script>
   <title></title>
 </head>
@@ -16,36 +16,6 @@
   <div id="content">
     <h1>My Trip</h1>
     <ul class="entries">
-      <li class="entry">
-        <div class="time">
-          <span>12:30pm</span></div>
-        <div class="location">
-          <span>Taj Mahal</span></div>
-      </li>
-      <li class="entry">
-        <div class="time">
-          <span>12:30pm</span></div>
-        <div class="location">
-          <span>Taj Mahal</span></div>
-      </li>
-      <li class="entry">
-        <div class="time">
-          <span>12:30pm</span></div>
-        <div class="location">
-          <span>Taj Mahal</span></div>
-      </li>
-      <li class="entry">
-        <div class="time">
-          <span>12:30pm</span></div>
-        <div class="location">
-          <span>Taj Mahal</span></div>
-      </li>
-      <li class="entry">
-        <div class="time">
-          <span>12:30pm</span></div>
-        <div class="location">
-          <span>Taj Mahal</span></div>
-      </li>
     </ul>
 
 
@@ -55,8 +25,12 @@
 
   <script type="text/template" id="entry-template">
     <li class="entry">
-      <div class="time"></div>
-      <div class="location"></div>
+      <div class="time-container">
+        <span class="time"></span>
+      </div>
+      <div class="location-container">
+        <span class="location"></span>
+      </div>
     </li>
   </script>
 

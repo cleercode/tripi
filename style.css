@@ -90,23 +90,23 @@ li.entry:nth-child(odd) {
   background: #eee;
 }
 
-.time {
+.time-container {
   float: left;
   padding: 5px 10px;
   width: 80px;
 }
 
-.time span {
+.time {
   border-bottom: 1px dotted #ccc;  
 }
 
-.location {
+.location-container {
   float: left;
   padding: 5px 10px;
   width: 480px;
 }
 
-.location span {
+.location {
   border-bottom: 1px dotted #ccc;
   font-weight: bold;
 }
