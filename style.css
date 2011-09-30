@@ -95,6 +95,7 @@ h1:focus {
 
 ul.entries {
   margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
 }
 
 li.entry {
@@ -136,6 +137,7 @@ li.entry:nth-child(odd) {
 .add_entry_input {
   background: white url(images/search.png) 10px 13px no-repeat;
   border: 1px solid #ccc;
+  border-radius: 3px;
   float: left;
   font: 16px/1 Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
   padding: 10px 10px 10px 36px;
@@ -149,13 +151,15 @@ li.entry:nth-child(odd) {
 }
 
 .add_entry_submit {
-  background: #aaa;
-  border-radius: 5px;
+  background: #d09300;
+  border-radius: 3px;
   color: white;
   float: left;
   font-weight: bold;
+  line-height: 1.4;
   margin-left: 10px;
   padding: 10px;
+  text-align: center;
   text-decoration: none;
   width: 70px;
   height: 22px;
@@ -178,8 +182,15 @@ li.entry:nth-child(odd) {
 #sidebar img {
   background: #fff;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 3px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   padding: 5px;
-  width: 280px;
+  width: 288px;
+}
+
+#sidebar p.description {
+  background: #eee;
+  border-radius: 3px;
+  font-size: 12px;
+  padding: 10px;
 }
