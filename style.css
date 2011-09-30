@@ -167,6 +167,7 @@ li.entry:hover a.remove {
 ul.add_entry_results {
   background: white;
   border: 1px solid #ccc;
+  border-top: none;
   display: none;
 }
 
