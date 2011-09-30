@@ -43,7 +43,7 @@ table {
 }
 
 body {
-  background: #ddd;
+  background: #f4f4f4 url(images/cubes.png);
   color: #444;
   font: 16px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
   padding: 20px;
@@ -63,12 +63,21 @@ header .logo {
 }
 
 #content {
-  background: #fafafa;
-  border-radius: 10px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  background: #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
   margin: 0 auto;
+  overflow: hidden;
+  width: 960px;
+}
+
+.day {
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+  float: left;
   padding: 20px;
-  width: 600px;
+  width: 580px;
 }
 
 h1 {
@@ -98,13 +107,14 @@ li.entry:nth-child(odd) {
 }
 
 .time {
-  border-bottom: 1px dotted #ccc;  
+  color: #999;
+  border-bottom: 1px dotted #ccc;
 }
 
 .location-container {
   float: left;
   padding: 5px 10px;
-  width: 480px;
+  width: 460px;
 }
 
 .location {
@@ -122,7 +132,7 @@ li.entry:nth-child(odd) {
   float: left;
   font: 16px/1 "Helvetica Neue", Arial, Helvetica, sans-serif;
   padding: 10px 10px 10px 36px;
-  width: 448px;
+  width: 432px;
   height: 20px;
 }
 
@@ -146,4 +156,17 @@ li.entry:nth-child(odd) {
 
 .add_entry_submit:hover {
   background: #f2ab00;
+}
+
+#sidebar {
+  float: left;
+  padding: 20px;
+  width: 300px;
+}
+
+#sidebar img {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 5px;
+  width: 280px;
 }
