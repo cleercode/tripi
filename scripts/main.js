@@ -1,3 +1,19 @@
+function addEntry() {
+  var location = $('.add_entry_input').val()
+    , gowalla = 'http://api.gowalla.com/spots/18568';
+
+  $.getJSON(gowalla, function(data) {
+    console.log(data);
+  });
+
+  View('entry')
+    .time('1pm')
+    .location(location)
+    .hide()
+    .appendTo('.entries')
+    .el.slideDown();
+}
+
 $(function() {
   // dummy data
   View('entry')
@@ -16,19 +32,10 @@ $(function() {
     .appendTo('.entries');
 
 
-  $('.add_entry_submit').click(function() {
-    var location = $('.add_entry_input').val()
-      , gowalla = 'http://api.gowalla.com/spots/18568';
+  $('.add_entry_submit').click(addEntry);
 
-    $.getJSON(gowalla, function(data) {
-      console.log(data);
-    });
-
-    View('entry')
-      .time('1pm')
-      .location(location)
-      .hide()
-      .appendTo('.entries')
-      .el.slideDown();
+  $('.add_entry_input').bind('keypress', function(e) {
+    var code = (e.keyCode ? e.keyCode : e.which);
+    if (code == 13) addEntry();
   });
 });
