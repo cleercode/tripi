@@ -17,9 +17,12 @@ $(function() {
 
 
   $('.add_entry_submit').click(function() {
+    var location = $('.add_entry_input').val();
     View('entry')
       .time('1pm')
-      .location('Carnegie Mellon University')
-      .appendTo('.entries');
+      .location(location)
+      .hide()
+      .appendTo('.entries')
+      .el.slideDown();
   });
 });
