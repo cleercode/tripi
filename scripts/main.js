@@ -9,14 +9,21 @@ function addEntry() {
   addEntryEl('1pm', location);
 }
 
-function addEntryEl(time, location) {
-  View('entry')
+function addEntryEl(time, location, noAnimation) {
+  var view = View('entry')
     .time(time)
     .location(location)
     .remove(function() { this.el.slideUp(); })
-    .hide()
-    .appendTo('.entries')
-    .el.slideDown();
+  
+  if (noAnimation) {
+    view.appendTo('.entries')
+  }
+  else {
+    view
+      .hide()
+      .appendTo('.entries')
+      .el.slideDown();
+  }
 }
 
 function autocomplete() {
@@ -44,20 +51,9 @@ function autocomplete() {
 
 $(function() {
   // dummy data
-  View('entry')
-    .time('12:30pm')
-    .location('Taj Mahal')
-    .appendTo('.entries');
-
-  View('entry')
-    .time('2pm')
-    .location('Great Wall of China')
-    .appendTo('.entries');
-
-  View('entry')
-    .time('3pm')
-    .location('Pyramid of Giza')
-    .appendTo('.entries');
+  addEntryEl('12:30pm', 'Taj Mahal', true);
+  addEntryEl('2pm', 'Great Wall of China', true);
+  addEntryEl('3pm', 'Pyramid of Giza', true);
 
   autocomplete();
 
