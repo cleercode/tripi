@@ -101,7 +101,6 @@ h1:focus {
 
 ul.entries {
   margin-bottom: 20px;
-  border-bottom: 1px solid #ccc;
 }
 
 li.entry {
@@ -112,6 +111,15 @@ li.entry {
 
 li.entry:nth-child(odd) {
   background: #eee;
+}
+
+li.entry:last-child {
+  border-bottom: 1px solid #ccc;
+}
+
+li:hover {
+  background: #ffd87b !important;
+  border-color: #ffce59 !important;
 }
 
 .time-container {
