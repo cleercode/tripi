@@ -144,11 +144,15 @@ li.entry:hover a.remove {
   overflow: hidden;
 }
 
+.add_entry_input_container {
+  float: left;
+  overflow: hidden;
+  position: relative;
+}
+
 .add_entry_input {
   background: white url(images/search.png) 10px 13px no-repeat;
   border: 1px solid #ccc;
-  border-radius: 3px;
-  float: left;
   font: 16px/1 Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
   padding: 10px 10px 10px 36px;
   width: 432px;
@@ -158,6 +162,20 @@ li.entry:hover a.remove {
 .add_entry_input:focus {
   border-color: #f2ab00;
   outline: none;
+}
+
+ul.add_entry_results {
+  background: white;
+  border: 1px solid #ccc;
+  display: none;
+}
+
+ul.add_entry_results li {
+  padding: 5px;
+}
+
+ul.add_entry_results li.smart_autocomplete_highlight {
+  background: #ffecb1;
 }
 
 .add_entry_submit {

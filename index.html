@@ -5,8 +5,10 @@
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato:lighter,regular,bold" media="all">
   <link rel="stylesheet" type="text/css" href="style.css" media="all">
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  <script type="text/javascript" src="scripts/jquery.smart_autocomplete.js"></script>
   <script type="text/javascript" src="scripts/events.js"></script>
   <script type="text/javascript" src="scripts/caustic.js"></script>
+  <script type="text/javascript" src="scripts/FlickrRequest.js"></script>
   <script type="text/javascript" src="scripts/main.js"></script>
   <title></title>
 </head>
@@ -22,12 +24,16 @@
 
 
       <div class="add_entry">
-        <input type="text" class="add_entry_input" placeholder="New location">
+        <div class="add_entry_input_container">
+          <input type="text" class="add_entry_input" placeholder="New location">
+          <ul class="add_entry_results"></ul>
+        </div>
         <a href="javascript:void(0)" class="add_entry_submit">Add stop</a>
       </div>
     </div>
     <div id="sidebar">
       <h1>Taj Mahal</h1>
+      <div class="images"></div>
       <img src="http://farm1.static.flickr.com/140/399383698_a39c49dd34.jpg" alt="">
       <p class="description">The Taj Mahal ( /ˈtɑːdʒ/ or /ˈtɑːʒ məˈhɑːl/;[1] Hindi: ताज महल, from Persian/Urdu: تاج محل "crown of buildings", pronounced [ˈt̪aːdʒ mɛˈɦɛl]; also "the Taj") is a mausoleum located in Agra, India. It was built by Mughal emperor Shah Jahan in memory of his third wife, Mumtaz Mahal. The Taj Mahal is widely recognized as "the jewel of Muslim art in India and one of the universally admired masterpieces of the world's heritage."</p>
     </div>
@@ -45,6 +51,7 @@
       <div class="location-container">
         <span class="location"></span>
       </div>
+      <a href="javascript:void(0)" class="remove">Remove</a>
     </li>
   </script>
 
