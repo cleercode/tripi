@@ -51,8 +51,12 @@ body {
 
 a {
   border-bottom: 1px solid #ccc;
-  color: #ff5f00;
+  color: #87b77c;
   text-decoration: none;
+}
+
+a:hover {
+  color: #f2ab00;
 }
 
 header {
@@ -165,9 +169,10 @@ li:hover {
 }
 
 .add_entry_submit {
-  background: #d09300;
+  background: #87b77c;
+  border: none;
   border-radius: 3px;
-  color: white;
+  color: #fff;
   float: left;
   font-weight: bold;
   line-height: 1.4;
@@ -181,6 +186,7 @@ li:hover {
 
 .add_entry_submit:hover {
   background: #f2ab00;
+  color: #fff;
 }
 
 #sidebar {
