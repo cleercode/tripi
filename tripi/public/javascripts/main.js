@@ -35,7 +35,7 @@ function addEntryEl(time, loc_obj, noAnimation) {
   if(loc_obj.firstChild)
   {
       addEntry(time, loc_obj);
-      console.log(unBury(loc_obj));
+      //console.log(unBury(loc_obj));
 //    view.location(loc_obj.firstChild.innerHTML + "<div style='display:none'>"+loc_obj.lastChild.innerHTML+"</div>");
   }
   
@@ -95,10 +95,12 @@ function autocomplete() {
 }
 
 function displaySidebar(loc) {
+if(loc == undefined)
+    return true;
 //  var data = $.parseJSON(loc.lastChild.innerHTML);
 //  var gowalla = 'http://www.tripvvv.com/hacku/jsonparser.php?q=' + loc.split(' ').join('+')
-//    , $loading = $('#sidebar_loading')
-//    , $results = $('#sidebar_results');
+    var $loading = $('#sidebar_loading')
+    var $results = $('#sidebar_results');
 
     $results.hide();
     $loading.show();
@@ -138,6 +140,11 @@ $(function() {
 
   $('ul.entries').delegate('li', 'click', function() {
     var loc = $(this).find('.location');
-    displaySidebar(loc);
+//    console.log(loc);
+    var data = undefined;
+    if( (loc[0]))
+        data = (unBury(loc[0].firstChild));
+        console.log(data);
+    displaySidebar(data);
   });
 });
