@@ -130,6 +130,22 @@ function displaySidebar(data) {
       }
     });
 
+    var nearbyurl = '/nearby?nearto='+coords.lat+","+coords.lng;
+    var where = $('.nearby');
+
+    $.getJSON(nearbyurl, function(nbd){
+        var result = nbd.results;
+        if(result == undefined) return;
+
+        for(var i=0; i < Math.min(result.length,5); i++)
+        {
+            var which = result[i];
+            var tag = $("<span>");
+            tag.html(which.name).data("reference", which.reference).appendTo($(document.body));
+            console.log(tag.data("reference"));
+        }
+     });
+
   });
 }
 
