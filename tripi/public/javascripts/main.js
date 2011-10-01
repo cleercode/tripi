@@ -17,7 +17,7 @@ function addEntry(time, loc)
   var it = s.getItem("iter"); //iter for itinerary
 
   trip.stops.push({
-      time: time
+      time: parseTime(time)
     , place: {
         name: loc.name
       , coords: loc.geometry && loc.geometry.location
@@ -54,7 +54,13 @@ function autocomplete() {
   var selected;
 
   $('.add_entry_submit').click(function() {
-    if (selected) addEntryEl('1pm', selected)
+    selected = (item.smartAutocompleteData.item)? item.smartAutocompleteData.item : "";
+    var time = '8am';
+    if (trip.stops.length > 0) {
+      var lastTime = trip.stops[trip.stops.length - 1].time;
+      time = dateToString(new Date(lastTime.getTime() + 3600000));
+    }
+    if (selected) addEntryEl(time, selected)
   });
 
   $('.add_entry_input').smartAutoComplete({
@@ -81,8 +87,13 @@ function autocomplete() {
       }
     , itemSelect: function(item) {
         selected = (item.smartAutocompleteData.item)? item.smartAutocompleteData.item : "";
-        if (selected) addEntryEl('1pm', selected);
-        displaySidebar(selected);
+        var time = '8am';
+        if (trip.stops.length > 0) {
+          var lastTime = trip.stops[trip.stops.length - 1].time;
+          time = dateToString(new Date(lastTime.getTime() + 3600000));
+        }
+        if (selected) addEntryEl(time, selected);
+        displaySidebar(unBury(selected));
       }
     , showResults: function() { $('.add_entry_results').show(); }
     , hideResults: function() { $('.add_entry_results').hide(); }
@@ -90,7 +101,7 @@ function autocomplete() {
 }
 
 function displaySidebar(data) {
-  if (data == undefined) return;
+  if ((data == undefined) || (data.reference == undefined)) return;
 
   var ref = data.reference
     , url = '/details?query=' + ref
@@ -100,12 +111,17 @@ function displaySidebar(data) {
   $results.hide();
   $loading.show();
 
-  $.getJSON(url, function(data) {
-    var result = data.result
-      , coords = result.geometry.location
-      , req = new FlickrRequest(coords.lng, coords.lat, result.name);
+  $.getJSON(url, function(dt) {
+    var result = (dt.result === undefined) ? {name: ''} : dt.result;
+    var coords = (result.name == '') ? {lng: 0, lat: 0} : result.geometry.location
+      , req = new FlickrRequest(coords.lng, coords.lat, result.name)
 
-    addEntry('1pm', result);
+    var time = '8am';
+    if (trip.stops.length > 0) {
+      var lastTime = trip.stops[trip.stops.length - 1].time;
+      time = dateToString(new Date(lastTime.getTime() + 3600000));
+    }
+    addEntry(time, result);
     
     req.doQuery(function(images) {
       $loading.hide();
@@ -127,12 +143,28 @@ function displaySidebar(data) {
   });
 }
 
-$(function() {
-  // dummy data
-  addEntryEl('12:30pm', 'Taj Mahal', true);
-  addEntryEl('2pm', 'Great Wall of China', true);
-  addEntryEl('3pm', 'Pyramid of Giza', true);
+function parseTime(str) {
+  var date = new Date();
+  var time = str.match(/(\d+)(?::(\d\d))?\s*(p?)/);
+  date.setHours(parseInt(time[1]) + (time[3] ? 12 : 0) );
+  date.setMinutes( parseInt(time[2]) || 0 );
+  return date;
+}
 
+function dateToString(date) {
+   var hour = date.getHours()
+     , minute = date.getMinutes()
+     , ap = hour < 12 ? 'am' : 'pm';
+
+  if (hour > 12) hour = hour - 12;
+  if (hour == 0) hour = 12;
+  if (minute < 10) minute = '0' + minute;
+  if (minute == '00') minute = '';
+  else minute = ':' + minute;
+  return hour + minute + ap;
+}
+
+$(function() {
   autocomplete();
 
   $('ul.entries').delegate('li', 'click', function() {
