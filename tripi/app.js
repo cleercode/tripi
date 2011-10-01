@@ -58,7 +58,6 @@ var Stop = mongoose.model('Stop', StopSchema);
 app.get('/', function(req, res) {
   res.render('index', {
       title: 'Tripi'
-    , layout: false
   });
 });
 
@@ -96,7 +95,10 @@ app.get('/save', function(req, res) {
 
 app.get('/:id', function(req,res) {
   Trip.findById(req.params.id, function(err, trip) {
-    res.send(trip);
+    res.render('trip', {
+        title: 'Tripi |' + trip.name
+      , trip: trip
+    })
   });
 });
 

@@ -43,8 +43,10 @@ header {
   width: 600px;
 }
 
-header .logo {
+header a.logo {
   background: url(../images/logo.png);
+  border: none;
+  display: block;
   text-indent: -9999px;
   margin: 0 auto;
   width: 155px;

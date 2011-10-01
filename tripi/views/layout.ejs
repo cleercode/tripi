@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato:lighter,regular,bold" media="all">
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" media="all">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/jquery.smart_autocomplete.js"></script>
+  <script type="text/javascript" src="javascripts/events.js"></script>
+  <script type="text/javascript" src="javascripts/caustic.js"></script>
+  <script type="text/javascript" src="javascripts/FlickrRequest.js"></script>
+  <script type="text/javascript" src="javascripts/main.js"></script>
+  <title></title>
+</head>
+<body>
+  <header>
+    <a href="/" class="logo" title="Tripi">Tripi</a>
+  </header>
+  <div id="content"><%- body %></div>
+
+  <footer>
+    <p>A <a href="http://developer.yahoo.com/hacku/cmu.html">Hack U</a> project by Jeff Cooper, Chris Lee, Prasanth Somasundar, and Vinay Vemuri</p>
+    <img src="images/google.png" alt="Powered by Google">
+  </footer>
+
+  <script type="text/template" id="entry-template">
+    <li class="entry">
+      <div class="time-container">
+        <span class="time"></span>
+      </div>
+      <div class="location-container">
+        <span class="location"></span>
+      </div>
+      <a href="javascript:void(0)" class="remove">Remove</a>
+    </li>
+  </script>
+
+  <script type="text/template" id="sidebar-template">
+    <h1 class="name"></h1>
+    <div class="images"></div>
+    <p class="description"></p>
+  </script>
+
+</body>
+</html>
