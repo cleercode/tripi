@@ -1,26 +1,28 @@
+var trip = {
+    name: 'My trip'
+  , stops: []
+};
+
 /***
  *
  *  addEntry takes loc as a json object representing everything
  *  NOT text
  */
 
-function addEntry(time, loc_obj)
+function addEntry(time, loc)
 {
-  var loc = unBury(loc_obj);
   localStorage.clear();
   var s = window.localStorage;
 
   var it = s.getItem("iter"); //iter for itinerary
 
-  if(!it)
-  {
-    it = new Object()
-    it.days=new Array();
-
-    it.days[0]=new Object();
-    it.days[0].stops = new Array();
-  }
-  it.days[0].stops.push({'time': time, 'loc': loc})
+  trip.stops.push({
+      time: parseTime(time)
+    , place: {
+        name: loc.name
+      , coords: loc.geometry && loc.geometry.location
+    }
+  });
   
   s.setItem("iter",JSON.stringify(it));
 }
@@ -30,14 +32,7 @@ function addEntryEl(time, loc_obj, noAnimation) {
   var view = View('entry')
     .time(time)
     .location(loc_obj)
-    .remove(function() { this.el.slideUp(); })
-
-  if(loc_obj.firstChild)
-  {
-      addEntry(time, loc_obj);
-      //console.log(unBury(loc_obj));
-//    view.location(loc_obj.firstChild.innerHTML + "<div style='display:none'>"+loc_obj.lastChild.innerHTML+"</div>");
-  }
+    .remove(function() { this.el.slideUp(); });
   
   if (noAnimation) {
     view.appendTo('.entries')
@@ -59,7 +54,13 @@ function autocomplete() {
   var selected;
 
   $('.add_entry_submit').click(function() {
-    if (selected) addEntryEl('1pm', selected)
+    selected = (item.smartAutocompleteData.item)? item.smartAutocompleteData.item : "";
+    var time = '8am';
+    if (trip.stops.length > 0) {
+      var lastTime = trip.stops[trip.stops.length - 1].time;
+      time = dateToString(new Date(lastTime.getTime() + 3600000));
+    }
+    if (selected) addEntryEl(time, selected)
   });
 
   $('.add_entry_input').smartAutoComplete({
@@ -86,7 +87,12 @@ function autocomplete() {
       }
     , itemSelect: function(item) {
         selected = (item.smartAutocompleteData.item)? item.smartAutocompleteData.item : "";
-        if (selected) addEntryEl('1pm', selected);
+        var time = '8am';
+        if (trip.stops.length > 0) {
+          var lastTime = trip.stops[trip.stops.length - 1].time;
+          time = dateToString(new Date(lastTime.getTime() + 3600000));
+        }
+        if (selected) addEntryEl(time, selected);
         displaySidebar(unBury(selected));
       }
     , showResults: function() { $('.add_entry_results').show(); }
@@ -96,15 +102,12 @@ function autocomplete() {
 
 function displaySidebar(data) {
   if ((data == undefined) || (data.reference == undefined)) return;
-  
 
   var ref = data.reference
     , url = '/details?query=' + ref
     , $loading = $('#sidebar_loading')
     , $results = $('#sidebar_results');
 
-
-  console.log(ref);
   $results.hide();
   $loading.show();
 
@@ -113,6 +116,13 @@ function displaySidebar(data) {
     var coords = (result.name == '') ? {lng: 0, lat: 0} : result.geometry.location
       , req = new FlickrRequest(coords.lng, coords.lat, result.name)
 
+    var time = '8am';
+    if (trip.stops.length > 0) {
+      var lastTime = trip.stops[trip.stops.length - 1].time;
+      time = dateToString(new Date(lastTime.getTime() + 3600000));
+    }
+    addEntry(time, result);
+    
     req.doQuery(function(images) {
       $loading.hide();
       $results.show();
@@ -149,12 +159,28 @@ function displaySidebar(data) {
   });
 }
 
-$(function() {
-  // dummy data
-  addEntryEl('12:30pm', 'Taj Mahal', true);
-  addEntryEl('2pm', 'Great Wall of China', true);
-  addEntryEl('3pm', 'Pyramid of Giza', true);
+function parseTime(str) {
+  var date = new Date();
+  var time = str.match(/(\d+)(?::(\d\d))?\s*(p?)/);
+  date.setHours(parseInt(time[1]) + (time[3] ? 12 : 0) );
+  date.setMinutes( parseInt(time[2]) || 0 );
+  return date;
+}
 
+function dateToString(date) {
+   var hour = date.getHours()
+     , minute = date.getMinutes()
+     , ap = hour < 12 ? 'am' : 'pm';
+
+  if (hour > 12) hour = hour - 12;
+  if (hour == 0) hour = 12;
+  if (minute < 10) minute = '0' + minute;
+  if (minute == '00') minute = '';
+  else minute = ':' + minute;
+  return hour + minute + ap;
+}
+
+$(function() {
   autocomplete();
 
   $('ul.entries').delegate('li', 'click', function() {
