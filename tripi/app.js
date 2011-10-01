@@ -30,7 +30,7 @@ app.configure('development', function(){
 app.configure('production', function(){
   app.use(express.errorHandler()); 
   app.set('Domain', 'http://tripi-noqg6ztz.dotcloud.com');
-  mongoose.connect('mongodb://root:RCSkLwJMdn46l1lWV87E@tripi-NOQG6ZTZ-db-0.dotcloud.com:15650')
+  mongoose.connect('mongodb://root:RCSkLwJMdn46l1lWV87E@tripi-NOQG6ZTZ-db-0.dotcloud.com:15650/tripi-prod')
 });
 
 var Schema = mongoose.Schema;
