@@ -103,14 +103,4 @@ $(function() {
     var loc = $(this).find('.location');
     displaySidebar(loc);
   });
-
-  /*
-  var req = new FlickrRequest(-79.943047,40.443028,'carnegie');
-  req.doQuery(function(images) {
-    for (var i = 0, len = images.length; i < len; i++) {
-      var image = images[i];
-      $('<img>').attr('src', image).appendTo('.images');
-    }
-  });
-  */
 });

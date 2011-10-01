@@ -1,0 +1,89 @@
+html, body, div, span,
+h1, h2, h3, h4, h5, h6, p,
+a, em, img, strong, ul, li {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+header, footer {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+body {
+  color: #000;
+  font: 16px/1.5 Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
+  padding: 20px;
+}
+
+header {
+  margin-bottom: 20px;
+}
+
+header a.logo {
+  color: #000;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#content {
+  overflow: hidden;
+}
+
+.day {
+  border-radius: 5px;
+  float: left;
+  width: 580px;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: lighter;
+  margin-bottom: 24px;
+}
+
+ul.entries {
+  margin-bottom: 20px;
+}
+
+li.entry {
+  border-top: 1px solid #ccc; 
+  overflow: hidden;
+  padding: 10px 0;
+}
+
+.time-container {
+  float: left;
+  padding: 5px 10px;
+  width: 80px;
+}
+
+.time {
+  color: #999;
+}
+
+.location-container {
+  float: left;
+  padding: 5px 10px;
+  width: 426px;
+}
+
+.location {
+  font-weight: bold;
+}
+
+ul.entries a.remove, .add_entry, #sidebar, .save, footer {
+ display: none;
+}

@@ -43,8 +43,10 @@ header {
   width: 600px;
 }
 
-header .logo {
+header a.logo {
   background: url(../images/logo.png);
+  border: none;
+  display: block;
   text-indent: -9999px;
   margin: 0 auto;
   width: 155px;
@@ -58,6 +60,16 @@ header .logo {
   margin: 0 auto;
   overflow: hidden;
   width: 960px;
+}
+
+#content.success {
+  background-image: none;
+  padding: 20px;
+  width: 920px;
+}
+
+#content.success a {
+  font-size: 24px;
 }
 
 .day {
