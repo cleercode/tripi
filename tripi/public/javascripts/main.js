@@ -94,28 +94,30 @@ function autocomplete() {
   });
 }
 
-function displaySidebar(loc) {
-if(loc == undefined)
-    return true;
-//  var data = $.parseJSON(loc.lastChild.innerHTML);
-//  var gowalla = 'http://www.tripvvv.com/hacku/jsonparser.php?q=' + loc.split(' ').join('+')
-    var $loading = $('#sidebar_loading')
-    var $results = $('#sidebar_results');
+function displaySidebar(data) {
+  if (data == undefined) return;
+  
+  console.log(ref);
 
-    $results.hide();
-    $loading.show();
+  var ref = data.reference
+    , url = '/details?query=' + ref
+    , $loading = $('#sidebar_loading')
+    , $results = $('#sidebar_results');
 
-  $.getJSON(gowalla, function(data) {
-    var result = data.spots[0]
-      , req = new FlickrRequest(result.lng, result.lat, location)
+  $results.hide();
+  $loading.show();
+
+  $.getJSON(url, function(data) {
+    var result = data.result
+      , coords = result.geometry.location
+      , req = new FlickrRequest(coords.lng, coords.lat, result.name)
 
     req.doQuery(function(images) {
       $loading.hide();
       $results.show();
 
       var view = View('sidebar')
-        .name(location)
-        .description(result.description)
+        .name(result.name)
         .replace('#sidebar_results')
         , $images = $('.images');
 
@@ -140,11 +142,8 @@ $(function() {
 
   $('ul.entries').delegate('li', 'click', function() {
     var loc = $(this).find('.location');
-//    console.log(loc);
-    var data = undefined;
-    if( (loc[0]))
-        data = (unBury(loc[0].firstChild));
-        console.log(data);
+    if (loc[0])
+      var data = unBury(loc[0].firstChild);
     displaySidebar(data);
   });
 });

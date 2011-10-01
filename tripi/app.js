@@ -103,6 +103,7 @@ app.get('/save', function(req, res) {
   var trip = new Trip(data);
   trip.save(function(err) {
     res.render('success', {
+      title: 'Tripi'
       url: app.set('Domain') + '/' + trip.id
     })
   });
