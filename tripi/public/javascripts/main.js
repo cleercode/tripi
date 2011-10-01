@@ -1,14 +1,3 @@
-function addEntry() {
-  var location = $('.add_entry_input').val()
-    , gowalla = 'http://www.tripvvv.com/hacku/jsonparser.php?q=Carnegie+Mellon';
-
-  $.getJSON(location, function(data) {
-    console.log(data);
-  });
-
-  addEntryEl('1pm', location);
-}
-
 function addEntryEl(time, location, noAnimation) {
   var view = View('entry')
     .time(time)
