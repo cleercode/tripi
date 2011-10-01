@@ -38,6 +38,8 @@ function addEntryEl(time, loc_obj, noAnimation) {
             }
         }
    });
+
+   
   
   if (noAnimation) {
     view.appendTo('.entries')
@@ -184,6 +186,7 @@ function displaySidebar(data) {
                   }
                   addEntry(time, result);
                   addEntryEl(time, '<li><div>'+result.name+'</div><div style="display:none;">'+JSON.stringify(result)+'</div></li>');
+                  displaySidebar(result);
                 });
         })();
       }

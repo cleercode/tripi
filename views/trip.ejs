@@ -5,7 +5,7 @@
       <% trip.stops.forEach(function(stop) { %>
         <li class="entry">
           <div class="time-container">
-            <span class="time"><%= dateToString(stop.time) %></span>
+            <span class="time" contenteditable="" ><%= dateToString(stop.time) %></span>
           </div>
           <div class="location-container">
             <span class="location"><%= stop.place.name %></span>
