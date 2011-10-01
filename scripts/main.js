@@ -38,9 +38,9 @@ function autocomplete() {
     , typeAhead: true
     , filter: function(term, source) {
         var dfd = new $.Deferred()
-          , url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' + term + 
+          , url = 'http://jdcooper.dyndns.org/jsonpwrapper.php?URL='+escape('https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' + escape(escape(term)) + 
                   '&types=establishment&location=40,-80&radius=500&sensor=true' +
-                  '&key=AIzaSyAyhFF7BBmfMhRZElunBN1rsfh-UEfohEM';
+                  '&key=AIzaSyAyhFF7BBmfMhRZElunBN1rsfh-UEfohEM')+'&callback=?';
         $.getJSON(url, function(data) {
           dfd.resolve($.map(data.predictions, function(item) {
             return item.description;
@@ -56,7 +56,7 @@ function autocomplete() {
     , itemSelect: function(item) {
         selected = item.smartAutocompleteData.item && item.smartAutocompleteData.item.innerText;
         if (selected) addEntryEl('1pm', selected);
-        displaySidebar();
+        displaySidebar(selected);
       }
     , showResults: function() { $('.add_entry_results').show(); }
     , hideResults: function() { $('.add_entry_results').hide(); }

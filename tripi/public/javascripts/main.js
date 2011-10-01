@@ -87,7 +87,7 @@ function autocomplete() {
     , itemSelect: function(item) {
         selected = (item.smartAutocompleteData.item)? item.smartAutocompleteData.item : "";
         if (selected) addEntryEl('1pm', selected);
-        displaySidebar(selected);
+        displaySidebar(unBury(selected));
       }
     , showResults: function() { $('.add_entry_results').show(); }
     , hideResults: function() { $('.add_entry_results').hide(); }
@@ -95,21 +95,22 @@ function autocomplete() {
 }
 
 function displaySidebar(data) {
-  if (data == undefined) return;
+  if ((data == undefined) || (data.reference == undefined)) return;
   
-  console.log(ref);
 
   var ref = data.reference
     , url = '/details?query=' + ref
     , $loading = $('#sidebar_loading')
     , $results = $('#sidebar_results');
 
+
+  console.log(ref);
   $results.hide();
   $loading.show();
 
-  $.getJSON(url, function(data) {
-    var result = data.result
-      , coords = result.geometry.location
+  $.getJSON(url, function(dt) {
+    var result = (dt.result === undefined) ? {name: ''} : dt.result;
+    var coords = (result.name == '') ? {lng: 0, lat: 0} : result.geometry.location
       , req = new FlickrRequest(coords.lng, coords.lat, result.name)
 
     req.doQuery(function(images) {

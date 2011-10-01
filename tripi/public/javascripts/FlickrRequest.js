@@ -30,6 +30,8 @@ function FlickrRequest(lon, lat, term)
     function parseFlickr(data)
     {
         response = data;
+        if(!response || !response.query || !response.query.results)
+            return Array(); //silent error fail
         var pics = data.query.results.photo;
         var ct = data.query.count;
         
