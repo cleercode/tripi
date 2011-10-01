@@ -217,7 +217,7 @@
         if(options.typeAhead && (raw_results[0].text.substr(0, $(context).val().length) == $(context).val()) ){
           var suggestion = raw_results[0].text; //options.typeAheadExtractor($(context).val(), raw_results[0]); 
           //add new typeAhead field
-          console.log(suggestion);
+          //console.log(suggestion);
           $(context).before("<input class='smart_autocomplete_type_ahead_field' type='text' autocomplete='off' disabled='disabled' value='" + suggestion + "'/>");
 
           $(context).css({
@@ -287,10 +287,11 @@
         var selected_item = ev.smartAutocompleteData.item;
 
         //get the text from selected item
-        console.log(selected_item);
+        //console.log(selected_item);
         var selected_value = $(selected_item) || $(selected_item).val();
         //set it as the value of the autocomplete field
-        $(context).val(selected_value); 
+        var string = options.resultFormatter(selected_value);
+        $(context).val("");
 
         //set item selected property
         options.setItemSelected(true);

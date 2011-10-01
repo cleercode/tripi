@@ -32,7 +32,19 @@ function addEntryEl(time, loc_obj, noAnimation) {
   var view = View('entry')
     .time(time)
     .location(loc_obj)
-    .remove(function() { this.el.slideUp(); });
+    .remove(function() 
+    { 
+        this.el.slideUp();
+        console.log(unBury(loc_obj));
+        for(var i=0;i<trip.stops.length;i++)
+        {
+            if((trip.stops[i].place.name == unBury(loc_obj).terms[0]) && (time == trips.stops[i].time))
+            {
+                trips.stops.splice(i,1);
+                i--;
+            }
+        }
+   });
   
   if (noAnimation) {
     view.appendTo('.entries')
