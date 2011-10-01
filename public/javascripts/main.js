@@ -1,5 +1,5 @@
 var trip = {
-    name: 'My trip'
+    name: 'My trip (click to rename)'
   , stops: []
 };
 
@@ -171,6 +171,16 @@ function displaySidebar(data) {
   });
 }
 
+function updateTripName() {
+  var before;
+  $('h1.name').live('focus', function() {
+    before = $(this).html();
+  }).live('blur keyup paste', function() {
+    var val = $(this).html();
+    if (val != before) trip.name = val;
+  });
+}
+
 function parseTime(str) {
   var date = new Date();
   var time = str.match(/(\d+)(?::(\d\d))?\s*(p?)/);
@@ -219,6 +229,7 @@ function renderMap(map, trip) {
 
 $(function() {
   autocomplete();
+  updateTripName();
 
   $('ul.entries').delegate('li', 'click', function() {
     var loc = $(this).find('.location');
