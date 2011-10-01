@@ -4,7 +4,8 @@
  */
 
 var express = require('express')
-  , request = require('request');
+  , request = require('request')
+  , mongoose = require('mongoose');
 
 var app = module.exports = express.createServer();
 
@@ -18,6 +19,7 @@ app.configure(function(){
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
   app.set('Google Places key', 'AIzaSyAyhFF7BBmfMhRZElunBN1rsfh-UEfohEM');
+  mongoose.connect('mongodb://localhost/tripi-dev');
 });
 
 app.configure('development', function(){
@@ -28,11 +30,39 @@ app.configure('production', function(){
   app.use(express.errorHandler()); 
 });
 
+var Schema = mongoose.Schema;
+
+// Models
+var Trip = new Schema({
+    name: String
+  , days: [Day]
+});
+
+var Day = new Schema({
+    stops: [Stop]
+});
+
+var Stop = new Schema({
+    time: Date
+  , place: {
+      name: String
+    , coords: {
+          lat: Number
+        , lng: Number
+      }
+    , photos: [String]
+  }
+});
+
+mongoose.model('Trip', Trip);
+mongoose.model('Day', Day);
+mongoose.model('Stop', Stop);
+
 // Routes
 
 app.get('/', function(req, res) {
   res.render('index', {
-      title: 'Express'
+      title: 'Tripi'
     , layout: false
   });
 });
@@ -43,6 +73,16 @@ app.get('/search', function(req, res) {
             '&types=establishment&location=40,-80&radius=500&sensor=true&key=' + app.set('Google Places key');
   request.get(url, function(error, response, body) {
     res.send(body);
+  });
+});
+
+app.get('/save', function(req, res) {
+  console.log('hi');
+});
+
+app.get('/:id', function(req,res) {
+  Trip.findById(id, function(err, trip) {
+    res.send(trip);
   });
 });
 
