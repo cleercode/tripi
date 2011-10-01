@@ -192,6 +192,31 @@ function dateToString(date) {
   return hour + minute + ap;
 }
 
+function renderMap(map, trip) {
+  var avgLat = 0
+    , avgLng = 0;
+  for (var i = 0, len = trip.stops.length; i < len; i++) {
+    var stop = trip.stops[i];
+    avgLat += stop.place.coords.lat;
+    avgLng += stop.place.coords.lng;  
+  }
+  avgLat = avgLat/trip.stops.length;
+  avgLng = avgLng/trip.stops.length;
+
+  map.setCenter(new GLatLng(avgLat, avgLng), 3);
+  map.setDisableDefaultUI(true);
+
+  for (var i = 0, len = trip.stops.length - 1; i < len; i++) {
+    var src = trip.stop[i]
+      , dest = trip.stop[i + 1]
+      , polyline = new GPolyline([
+       new GLatLng(src.place.coords.lat, src.place.coords.lng),
+       new GLatLng(dest.place.coords.lat, dest.place.coords.lng)
+    ], "#ff0000", 10);
+    map.addOverlay(polyline);
+  } 
+}
+
 $(function() {
   autocomplete();
 

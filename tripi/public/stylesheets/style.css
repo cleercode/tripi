@@ -258,8 +258,8 @@ ul.add_entry_results li.smart_autocomplete_highlight {
 }
 
 .nearby_header {
-  font-size: lighter;
-  font-weight: 18px;
+  font-size: 18px;
+  font-weight: lighter;
   padding: 5px 10px;
 }
 
