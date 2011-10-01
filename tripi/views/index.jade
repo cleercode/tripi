@@ -1,0 +1,28 @@
+.day
+  h1(contenteditable='contenteditable') My Trip
+  ul.entries
+  .add_entry
+    .add_entry_input_container
+      input.add_entry_input(type='text', placeholder='New location')
+      ul.add_entry_results
+    a.add_entry_submit(href='javascript:void(0)') Add stop
+  a.save(href='javascript:void(0)') Save
+#sidebar
+  #sidebar_loading
+    img(src='images/loading.gif', alt='Loading')
+    p Loading information
+  #sidebar_results
+    div
+
+script#entry-template(type='text/template') 
+  li.entry
+    .time-container
+      span.time
+    .location-container
+      span.location
+    a.remove(href='javascript:void(0)') Remove
+    
+script#sidebar-template(type='text/template')
+  h1.name
+  .images
+  p.description
