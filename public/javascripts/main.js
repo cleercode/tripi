@@ -202,29 +202,41 @@ function dateToString(date) {
   return hour + minute + ap;
 }
 
-function renderMap(map, trip) {
+function renderMap(mapID, trip) {
   var avgLat = 0
-    , avgLng = 0;
+    , avgLng = 0
+    , points = [];
+
   for (var i = 0, len = trip.stops.length; i < len; i++) {
     var stop = trip.stops[i];
     avgLat += stop.place.coords.lat;
-    avgLng += stop.place.coords.lng;  
+    avgLng += stop.place.coords.lng;
   }
   avgLat = avgLat/trip.stops.length;
   avgLng = avgLng/trip.stops.length;
 
-  map.setCenter(new GLatLng(avgLat, avgLng), 3);
-  map.setDisableDefaultUI(true);
+  var map = new google.maps.Map(document.getElementById(mapID), {
+      center: new google.maps.LatLng(avgLat, avgLng)
+    , zoom: 3
+    , disableDefaultUI: true
+    , mapTypeId: google.maps.MapTypeId.TERRAIN
+  });
 
-  for (var i = 0, len = trip.stops.length - 1; i < len; i++) {
-    var src = trip.stop[i]
-      , dest = trip.stop[i + 1]
-      , polyline = new GPolyline([
-       new GLatLng(src.place.coords.lat, src.place.coords.lng),
-       new GLatLng(dest.place.coords.lat, dest.place.coords.lng)
-    ], "#ff0000", 10);
-    map.addOverlay(polyline);
-  } 
+  for (var i = 0, len = trip.stops.length; i < len; i++) {
+    var stop = trip.stops[i]
+      , point = new google.maps.LatLng(stop.place.coords.lat, stop.place.coords.lng)
+      , marker = new google.maps.Marker({
+          position: point
+        , map: map
+    })
+    points.push(point);
+  };
+
+  var path = new google.maps.Polyline({
+        path: points
+      , strokeColor: '#ffba15'
+      });
+  path.setMap(map);
 }
 
 $(function() {
