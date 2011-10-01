@@ -21,6 +21,7 @@ function addEntry(time, loc)
     , place: {
         name: loc.name
       , coords: loc.geometry && loc.geometry.location
+      , locvar: loc
     }
   });
   
@@ -110,6 +111,26 @@ function autocomplete() {
     , showResults: function() { $('.add_entry_results').show(); }
     , hideResults: function() { $('.add_entry_results').hide(); }
   });
+}
+
+function sortEntries()
+{
+    /*var oldentries = $(".entries").children();
+    var sortedentries = oldentries.map(function(x)
+                    {
+                        var myjson = $.parseJSON($($($($($(x).children()[1]).children()[0]).children()[0]).children()[1]).html());
+                    }
+    */
+    var sorted = (trip.stops).sort(function(x,y){return (x - y);});
+    trip.stops = sorted;
+
+//    $(".entries").each(function(x){$(this).remove});
+    $(".entries").empty();
+    for(var i=0;i < trip.stops.length;i++)
+    {
+        console.log(trip.stops[i].place.locvar);
+        addEntryEl(trip.stops[i].time,trip.stops[i].place.locvar, true);
+    }
 }
 
 function displaySidebar(data) {
@@ -205,7 +226,7 @@ function dateToString(date) {
 function renderMap(mapID, trip) {
   var avgLat = 0
     , avgLng = 0
-    , points = [];
+     , points = [];
 
   for (var i = 0, len = trip.stops.length; i < len; i++) {
     var stop = trip.stops[i];
