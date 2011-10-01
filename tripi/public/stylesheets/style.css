@@ -257,6 +257,16 @@ ul.add_entry_results li.smart_autocomplete_highlight {
   padding: 10px;
 }
 
+.nearby_header {
+  font-size: lighter;
+  font-weight: 18px;
+  padding: 5px 10px;
+}
+
+.nearby_entry {
+  padding: 5px 10px
+}
+
 .save {
   background: #87b77c;
   border: none;
