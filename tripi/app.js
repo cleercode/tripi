@@ -23,7 +23,7 @@ app.configure(function(){
 
 app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-  app.set('Domain', 'http://localhost:3000');
+  app.set('Domain', 'http://localhost:8080');
   mongoose.connect('mongodb://localhost/tripi-dev');
 });
 
@@ -103,8 +103,8 @@ app.get('/save', function(req, res) {
   var trip = new Trip(data);
   trip.save(function(err) {
     res.render('success', {
-      title: 'Tripi'
-      url: app.set('Domain') + '/' + trip.id
+        title: 'Tripi'
+      , url: app.set('Domain') + '/' + trip.id
     })
   });
 });
