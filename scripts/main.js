@@ -51,25 +51,35 @@ function autocomplete() {
 }
 
 function displaySidebar(location) {
-  var gowalla = 'http://www.tripvvv.com/hacku/jsonparser.php?q=' + location.split(' ').join('+');
+  var gowalla = 'http://www.tripvvv.com/hacku/jsonparser.php?q=' + location.split(' ').join('+')
+    , $loading = $('#sidebar_loading')
+    , $results = $('#sidebar_results');
 
-  console.log(gowalla);
+    $results.hide();
+    $loading.show();
 
   $.getJSON(gowalla, function(data) {
-    var result = data.spots[0];
-    $('#sidebar h1').text(location);
-    $('#sidebar p.description').text(result.description);
+    var result = data.spots[0]
+      , req = new FlickrRequest(result.lng, result.lat, location)
 
-    $('#sidebar .images').empty();
-
-    var req = new FlickrRequest(result.lng, result.lat, location);
     req.doQuery(function(images) {
-      if (images[0]) $('<img>').attr('src', images[0].medium).appendTo('.images');
+      $loading.hide();
+      $results.show();
+
+      var view = View('sidebar')
+        .name(location)
+        .description(result.description)
+        .replace('#sidebar_results')
+        , $images = $('.images');
+
+
+      if (images[0]) $('<img>').attr('src', images[0].medium).appendTo($images);
       for (var i = 1, len = images.length; i < len && i < 4; i++) {
         var image = images[i];
-        $('<img>').attr('src', image.square).addClass('square').appendTo('.images');
+        $('<img>').attr('src', image.square).addClass('square').appendTo($images);
       }
     });
+
   });
 }
 
