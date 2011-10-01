@@ -9,13 +9,7 @@ var trip = {
  *  NOT text
  */
 
-function addEntry(time, loc)
-{
-  localStorage.clear();
-  var s = window.localStorage;
-
-  var it = s.getItem("iter"); //iter for itinerary
-
+function addEntry(time, loc) {
   trip.stops.push({
       time: parseTime(time)
     , place: {
@@ -23,8 +17,6 @@ function addEntry(time, loc)
       , coords: loc.geometry && loc.geometry.location
     }
   });
-  
-  s.setItem("iter",JSON.stringify(it));
 }
 
 
@@ -150,24 +142,33 @@ function displaySidebar(data) {
         var image = images[i];
         $('<img>').attr('src', image.square).addClass('square').appendTo($images);
       }
-    });
 
     var nearbyurl = '/nearby?nearto=' + coords.lat + "," + coords.lng;
-    var where = $('.nearby');
 
     $.getJSON(nearbyurl, function(nbd) {
       var results = nbd.results;
-      console.log(nbd);
       if (results == undefined) return;
 
       for (var i = 0; i < Math.min(results.length, 5); i++) {
-        var result = results[i]
-          , view = View('nearby')
-          .name(result.name)
-          .appendTo('.nearby');
+        (function () {
+          var result = results[i]
+            , view = View('nearby')
+                .name(result.name)
+                .appendTo('.nearby')
+                .add(function() {
+                  var time = '8am';
+                  if (trip.stops.length > 0) {
+                    var lastTime = trip.stops[trip.stops.length - 1].time;
+                    time = dateToString(new Date(lastTime.getTime() + 3600000));
+                  }
+                  addEntry(time, result);
+                  addEntryEl(time, '<li><div>'+result.name+'</div><div style="display:none;">'+JSON.stringify(result)+'</div></li>');
+                });
+        })();
       }
      });
 
+    });
   });
 }
 
