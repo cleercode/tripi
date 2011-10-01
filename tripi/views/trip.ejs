@@ -5,7 +5,7 @@
       <% trip.stops.forEach(function(stop) { %>
         <li class="entry">
           <div class="time-container">
-            <span class="time"><%= stop.time %></span>
+            <span class="time"><%= dateToString(stop.time) %></span>
           </div>
           <div class="location-container">
             <span class="location"><%= stop.place.name %></span>
@@ -24,6 +24,10 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  var trip = JSON.parse('<%- JSON.stringify(trip) %>');
+</script>
 
 <script type="text/template" id="sidebar-template">
   <h1 class="name"></h1>
