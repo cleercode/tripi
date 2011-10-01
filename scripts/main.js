@@ -1,8 +1,8 @@
 function addEntry() {
   var location = $('.add_entry_input').val()
-    , gowalla = 'http://api.gowalla.com/spots/18568';
+    , gowalla = 'http://www.tripvvv.com/hacku/jsonparser.php?q=Carnegie+Mellon';
 
-  $.getJSON(gowalla, function(data) {
+  $.getJSON(location, function(data) {
     console.log(data);
   });
 
@@ -43,9 +43,33 @@ function autocomplete() {
     , itemSelect: function(item) {
         selected = item.smartAutocompleteData.item && item.smartAutocompleteData.item.innerText;
         if (selected) addEntryEl('1pm', selected);
+        displaySidebar();
       }
     , showResults: function() { $('.add_entry_results').show(); }
     , hideResults: function() { $('.add_entry_results').hide(); }
+  });
+}
+
+function displaySidebar(location) {
+  var gowalla = 'http://www.tripvvv.com/hacku/jsonparser.php?q=' + location.split(' ').join('+');
+
+  console.log(gowalla);
+
+  $.getJSON(gowalla, function(data) {
+    var result = data.spots[0];
+    $('#sidebar h1').text(location);
+    $('#sidebar p.description').text(result.description);
+
+    $('#sidebar .images').empty();
+
+    var req = new FlickrRequest(result.lng, result.lat, location);
+    req.doQuery(function(images) {
+      if (images[0]) $('<img>').attr('src', images[0].medium).appendTo('.images');
+      for (var i = 1, len = images.length; i < len && i < 4; i++) {
+        var image = images[i];
+        $('<img>').attr('src', image.square).addClass('square').appendTo('.images');
+      }
+    });
   });
 }
 
@@ -56,6 +80,11 @@ $(function() {
   addEntryEl('3pm', 'Pyramid of Giza', true);
 
   autocomplete();
+
+  $('li.entry').click(function() {
+    var location = $(this).find('.location').text();
+    displaySidebar(location);
+  });
 
   /*
   var req = new FlickrRequest(-79.943047,40.443028,'carnegie');
