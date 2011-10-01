@@ -267,21 +267,22 @@ ul.add_entry_results li.smart_autocomplete_highlight {
   padding: 5px 10px
 }
 
-.save {
+.save_button {
   background: #87b77c;
   border: none;
   border-radius: 3px;
   color: #fff;
+  cursor: pointer;
   display: block;
-  font-weight: bold;
-  line-height: 1.4;
+  font: bold 16px/1.4 Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
   margin-top: 20px;
   padding: 10px;
   text-align: center;
   text-decoration: none;
+  width: 100%;
 }
 
-.save:hover {
+.save_button:hover {
   background: #f2ab00;
   color: #fff;
 }

@@ -93,24 +93,17 @@ app.get('/details', function(req, res) {
   });
 });
 
-app.get('/save', function(req, res) {
-  var data = {
-    name: 'My trip'
-  , stops: [{
-        time: new Date()
-      , place: {
-          name: 'Carnegie Mellon University'
-        , coords: {
-            lat: '40'
-          , lng: '80'
-        }
-        , photos: ['5508228689']
-        }
-      }
-    ]
+app.post('/save', function(req, res) {
+  var data = JSON.parse(req.param('trip'));
+  
+  // dates get transformed to UTC strings by JSON.stringify
+  for (var i = 0, len = data.stops.length; i < len; i++) {
+    var stop = data.stops[i];
+    stop.time = new Date(stop.time);
   }
 
   var trip = new Trip(data);
+
   trip.save(function(err) {
     res.render('success', {
         title: 'Tripi'

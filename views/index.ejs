@@ -1,6 +1,6 @@
 <div id="content">
   <div class="day">
-    <h1 contenteditable>My Trip</h1>
+    <h1 class="name" contenteditable>My trip (click to rename)</h1>
     <ul class="entries">
     </ul>
 
@@ -12,7 +12,9 @@
       </div>
       <a href="javascript:void(0)" class="add_entry_submit">Add stop</a>
     </div>
-    <a href="/save" class="save">Save</a>
+    <form method="post" action="/save" class="save_form">
+      <input type="submit" class="save_button" value="Save"></input>
+    </form>
   </div>
   <div id="sidebar">
     <div id="sidebar_loading">

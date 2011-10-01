@@ -237,4 +237,11 @@ $(function() {
       var data = unBury(loc[0].firstChild);
     displaySidebar(data);
   });
+
+  $('.save_button').click(function(e) {
+    e.preventDefault();
+    $('.save_form #trip').remove();
+    $('<input type="hidden" name="trip" id="trip" value=\'' + JSON.stringify(trip) + '\'>').appendTo('.save_form');
+    $('.save_form').submit();
+  });
 });
