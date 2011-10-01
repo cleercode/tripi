@@ -64,10 +64,20 @@ app.get('/', function(req, res) {
   });
 });
 
-app.get('/search', function(req, res) {
+app.get('/autocomplete', function(req, res) {
   var query = req.param('query')
+    , types = escape('amusement_park|aquarium|art_gallery|bar|beauty_salon|bowling_alley|cafe|campground|casino|church|department_store|establishment|food|hindu_temple|jewelry_store|library|liquor_store|local_government_office|meal_takeaway|mosque|movie_theater|museum|night_club|park|restaurant|shopping_mall|spa|stadium|synagogue|university|zoo')
     , url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' + encodeURIComponent(query) +
-            '&types=establishment&location=40,-80&radius=500&sensor=true&key=' + app.set('Google Places key');
+            '&types=' + types + '&location=40,-80&radius=500&sensor=true&key=' + app.set('Google Places key');
+  request.get(url, function(error, response, body) {
+    res.send(body);
+  });
+});
+
+app.get('/details', function(req, res) {
+  var query = req.param('query')
+    , url = 'https://maps.googleapis.com/maps/api/place/details/json?reference=' + encodeURIComponent(query) + 
+            '&sensor=true&key=' + app.set('Google Places key');
   request.get(url, function(error, response, body) {
     res.send(body);
   });

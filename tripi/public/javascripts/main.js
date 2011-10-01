@@ -27,7 +27,7 @@ function autocomplete() {
     , typeAhead: true
     , filter: function(term, source) {
         var dfd = new $.Deferred()
-          , url = '/search?query=' + term;
+          , url = '/autocomplete?query=' + term;
         $.getJSON(url, function(data) {
           dfd.resolve($.map(data.predictions, function(item) {
             item.text = item.description;
