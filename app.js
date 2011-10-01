@@ -116,7 +116,7 @@ app.get('/:id', function(req,res) {
   Trip.findById(req.params.id, function(err, trip) {
     if (err) return res.send(404);
     res.render('trip', {
-        title: 'Tripi |' + trip.name
+        title: 'Tripi | ' + trip.name
       , trip: trip
       , dateToString: function(date) {
          var hour = date.getHours()
