@@ -38,11 +38,12 @@ function autocomplete() {
     , resultsContainer: '.add_entry_results'
   }).bind({
       itemFocus: function(item) {
-        selected = item.smartAutocompleteData.item && item.smartAutocompleteData.item.innerText;
+        selected = item.smartAutocompleteData.item && item.smartAutocompleteData.item.innerHTML;
       }
     , itemSelect: function(item) {
-        selected = item.smartAutocompleteData.item && item.smartAutocompleteData.item.innerText;
+        selected = item.smartAutocompleteData.item && item.smartAutocompleteData.item.innerHTML;
         if (selected) addEntryEl('1pm', selected);
+        console.log(item);
         displaySidebar(selected);
       }
     , showResults: function() { $('.add_entry_results').show(); }
@@ -50,8 +51,8 @@ function autocomplete() {
   });
 }
 
-function displaySidebar(location) {
-  var gowalla = 'http://www.tripvvv.com/hacku/jsonparser.php?q=' + location.split(' ').join('+')
+function displaySidebar(loc) {
+  var gowalla = 'http://www.tripvvv.com/hacku/jsonparser.php?q=' + loc.split(' ').join('+')
     , $loading = $('#sidebar_loading')
     , $results = $('#sidebar_results');
 
@@ -92,8 +93,10 @@ $(function() {
   autocomplete();
 
   $('ul.entries').delegate('li', 'click', function() {
-    var location = $(this).find('.location').text();
-    displaySidebar(location);
+    console.log($(this));
+    var loc = $(this).find('.location').text();
+    console.log(loc);
+//    displaySidebar(loc);
   });
 
   /*
