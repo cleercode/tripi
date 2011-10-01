@@ -1,8 +1,43 @@
-function addEntryEl(time, location, noAnimation) {
+/***
+ *
+ *  addEntry takes loc as a json object representing everything
+ *  NOT text
+ */
+
+function addEntry(time, loc_obj)
+{
+  var loc = unBury(loc_obj);
+  localStorage.clear();
+  var s = window.localStorage;
+
+  var it = s.getItem("iter"); //iter for itinerary
+
+  if(!it)
+  {
+    it = new Object()
+    it.days=new Array();
+
+    it.days[0]=new Object();
+    it.days[0].stops = new Array();
+  }
+  it.days[0].stops.push({'time': time, 'loc': loc})
+  
+  s.setItem("iter",JSON.stringify(it));
+}
+
+
+function addEntryEl(time, loc_obj, noAnimation) {
   var view = View('entry')
     .time(time)
-    .location(location)
+    .location(loc_obj)
     .remove(function() { this.el.slideUp(); })
+
+  if(loc_obj.firstChild)
+  {
+      addEntry(time, loc_obj);
+      console.log(unBury(loc_obj));
+//    view.location(loc_obj.firstChild.innerHTML + "<div style='display:none'>"+loc_obj.lastChild.innerHTML+"</div>");
+  }
   
   if (noAnimation) {
     view.appendTo('.entries')
@@ -13,6 +48,11 @@ function addEntryEl(time, location, noAnimation) {
       .appendTo('.entries')
       .el.slideDown();
   }
+}
+
+function unBury(el)
+{
+  return $.parseJSON(el.lastChild.innerHTML);
 }
 
 function autocomplete() {
@@ -45,7 +85,6 @@ function autocomplete() {
         selected = (item.smartAutocompleteData.item)? item.smartAutocompleteData.item: undefined;
       }
     , itemSelect: function(item) {
-        console.log(item);
         selected = (item.smartAutocompleteData.item)? item.smartAutocompleteData.item : "";
         if (selected) addEntryEl('1pm', selected);
         displaySidebar(selected);
@@ -56,12 +95,10 @@ function autocomplete() {
 }
 
 function displaySidebar(loc) {
-  console.log("Displaying sidebar!");
-  var data = $.parseJSON(loc.lastChild.innerHTML);
-  console.log(data);
-  var gowalla = 'http://www.tripvvv.com/hacku/jsonparser.php?q=' + loc.split(' ').join('+')
-    , $loading = $('#sidebar_loading')
-    , $results = $('#sidebar_results');
+//  var data = $.parseJSON(loc.lastChild.innerHTML);
+//  var gowalla = 'http://www.tripvvv.com/hacku/jsonparser.php?q=' + loc.split(' ').join('+')
+//    , $loading = $('#sidebar_loading')
+//    , $results = $('#sidebar_results');
 
     $results.hide();
     $loading.show();
