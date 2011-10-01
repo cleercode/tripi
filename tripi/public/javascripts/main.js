@@ -43,7 +43,7 @@ function autocomplete() {
     , itemSelect: function(item) {
         selected = item.smartAutocompleteData.item && item.smartAutocompleteData.item.innerText;
         if (selected) addEntryEl('1pm', selected);
-        displaySidebar();
+        displaySidebar(selected);
       }
     , showResults: function() { $('.add_entry_results').show(); }
     , hideResults: function() { $('.add_entry_results').hide(); }
