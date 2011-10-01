@@ -148,7 +148,13 @@ function displaySidebar(data) {
       var lastTime = trip.stops[trip.stops.length - 1].time;
       time = dateToString(new Date(lastTime.getTime() + 3600000));
     }
-    addEntry(time, result);
+
+    var exists = false;
+    for (var i = 0, len = trip.stops.length; i < len; i++) {
+      var stop = trip.stops[i].place.locvar
+        , exists = exists || result.id == stop.id;
+    }
+    if (!exists) addEntry(time, result);
     
     req.doQuery(function(images) {
       $loading.hide();
@@ -242,7 +248,7 @@ function renderMap(mapID, trip) {
 
   var map = new google.maps.Map(document.getElementById(mapID), {
       center: new google.maps.LatLng(avgLat, avgLng)
-    , zoom: 3
+    , zoom: 12
     , disableDefaultUI: true
     , mapTypeId: google.maps.MapTypeId.TERRAIN
   });
