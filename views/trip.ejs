@@ -1,6 +1,6 @@
 <div id="content">
   <div class="day">
-    <h1 contenteditable>My Trip</h1>
+    <h1 contenteditable><%= trip.name %></h1>
     <ul class="entries">
       <% trip.stops.forEach(function(stop) { %>
         <li class="entry">
