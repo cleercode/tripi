@@ -23,11 +23,13 @@ app.configure(function(){
 });
 
 app.configure('development', function(){
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
+  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+  app.set('Domain', 'http://localhost:3000');
 });
 
 app.configure('production', function(){
   app.use(express.errorHandler()); 
+  app.set('Domain', 'http://tripi.com');
 });
 
 var Schema = mongoose.Schema;
@@ -89,12 +91,15 @@ app.get('/save', function(req, res) {
 
   var trip = new Trip(data);
   trip.save(function(err) {
-    res.redirect('/' + trip.id);
+    res.render('success', {
+      url: app.set('Domain') + '/' + trip.id
+    })
   });
 });
 
 app.get('/:id', function(req,res) {
   Trip.findById(req.params.id, function(err, trip) {
+    if (err) return res.send(404);
     res.render('trip', {
         title: 'Tripi |' + trip.name
       , trip: trip

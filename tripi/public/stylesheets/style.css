@@ -62,6 +62,16 @@ header a.logo {
   width: 960px;
 }
 
+#content.success {
+  background-image: none;
+  padding: 20px;
+  width: 920px;
+}
+
+#content.success a {
+  font-size: 24px;
+}
+
 .day {
   border-radius: 5px;
   float: left;
