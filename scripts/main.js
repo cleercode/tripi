@@ -91,7 +91,7 @@ $(function() {
 
   autocomplete();
 
-  $('li.entry').click(function() {
+  $('ul.entries').delegate('li', 'click', function() {
     var location = $(this).find('.location').text();
     displaySidebar(location);
   });
