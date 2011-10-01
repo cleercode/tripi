@@ -1,26 +1,28 @@
+var trip = {
+    name: 'My trip'
+  , stops: []
+};
+
 /***
  *
  *  addEntry takes loc as a json object representing everything
  *  NOT text
  */
 
-function addEntry(time, loc_obj)
+function addEntry(time, loc)
 {
-  var loc = unBury(loc_obj);
   localStorage.clear();
   var s = window.localStorage;
 
   var it = s.getItem("iter"); //iter for itinerary
 
-  if(!it)
-  {
-    it = new Object()
-    it.days=new Array();
-
-    it.days[0]=new Object();
-    it.days[0].stops = new Array();
-  }
-  it.days[0].stops.push({'time': time, 'loc': loc})
+  trip.stops.push({
+      time: time
+    , place: {
+        name: loc.name
+      , coords: loc.geometry && loc.geometry.location
+    }
+  });
   
   s.setItem("iter",JSON.stringify(it));
 }
@@ -30,14 +32,7 @@ function addEntryEl(time, loc_obj, noAnimation) {
   var view = View('entry')
     .time(time)
     .location(loc_obj)
-    .remove(function() { this.el.slideUp(); })
-
-  if(loc_obj.firstChild)
-  {
-      addEntry(time, loc_obj);
-      //console.log(unBury(loc_obj));
-//    view.location(loc_obj.firstChild.innerHTML + "<div style='display:none'>"+loc_obj.lastChild.innerHTML+"</div>");
-  }
+    .remove(function() { this.el.slideUp(); });
   
   if (noAnimation) {
     view.appendTo('.entries')
@@ -96,8 +91,6 @@ function autocomplete() {
 
 function displaySidebar(data) {
   if (data == undefined) return;
-  
-  console.log(ref);
 
   var ref = data.reference
     , url = '/details?query=' + ref
@@ -110,8 +103,10 @@ function displaySidebar(data) {
   $.getJSON(url, function(data) {
     var result = data.result
       , coords = result.geometry.location
-      , req = new FlickrRequest(coords.lng, coords.lat, result.name)
+      , req = new FlickrRequest(coords.lng, coords.lat, result.name);
 
+    addEntry('1pm', result);
+    
     req.doQuery(function(images) {
       $loading.hide();
       $results.show();
