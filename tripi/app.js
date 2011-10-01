@@ -17,6 +17,7 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
+  app.set('Google Places key', 'AIzaSyAyhFF7BBmfMhRZElunBN1rsfh-UEfohEM');
 });
 
 app.configure('development', function(){
@@ -39,7 +40,7 @@ app.get('/', function(req, res) {
 app.get('/search', function(req, res) {
   var query = req.param('query')
     , url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' + encodeURIComponent(query) +
-            '&types=establishment&location=40,-80&radius=500&sensor=true&key=AIzaSyAyhFF7BBmfMhRZElunBN1rsfh-UEfohEM';
+            '&types=establishment&location=40,-80&radius=500&sensor=true&key=' + app.set('Google Places key');
   request.get(url, function(error, response, body) {
     res.send(body);
   });
