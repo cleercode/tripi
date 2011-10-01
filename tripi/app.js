@@ -33,16 +33,12 @@ app.configure('production', function(){
 var Schema = mongoose.Schema;
 
 // Models
-var Trip = new Schema({
+var TripSchema = new Schema({
     name: String
-  , days: [Day]
+  , stops: [Stop]
 });
 
-var Day = new Schema({
-    stops: [Stop]
-});
-
-var Stop = new Schema({
+var StopSchema = new Schema({
     time: Date
   , place: {
       name: String
@@ -54,9 +50,8 @@ var Stop = new Schema({
   }
 });
 
-mongoose.model('Trip', Trip);
-mongoose.model('Day', Day);
-mongoose.model('Stop', Stop);
+var Trip = mongoose.model('Trip', TripSchema);
+var Stop = mongoose.model('Stop', StopSchema);
 
 // Routes
 
@@ -77,11 +72,30 @@ app.get('/search', function(req, res) {
 });
 
 app.get('/save', function(req, res) {
-  console.log('hi');
+  var data = {
+    name: 'My trip'
+  , stops: [{
+        time: new Date()
+      , place: {
+          name: 'Carnegie Mellon University'
+        , coords: {
+            lat: '40'
+          , lng: '80'
+        }
+        , photos: ['5508228689']
+        }
+      }
+    ]
+  }
+
+  var trip = new Trip(data);
+  trip.save(function(err) {
+    res.redirect('/' + trip.id);
+  });
 });
 
 app.get('/:id', function(req,res) {
-  Trip.findById(id, function(err, trip) {
+  Trip.findById(req.params.id, function(err, trip) {
     res.send(trip);
   });
 });
