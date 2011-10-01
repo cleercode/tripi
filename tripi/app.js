@@ -18,7 +18,7 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
-  app.set('Google Places key', 'AIzaSyAyhFF7BBmfMhRZElunBN1rsfh-UEfohEM');
+  app.set('Google Places key', 'AIzaSyCqzhXkURBC_OnjacQDGFLaKw3Kc7keTow');
 });
 
 app.configure('development', function(){
