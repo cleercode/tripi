@@ -46,7 +46,11 @@ function FlickrRequest(lon, lat, term)
        var farm=this.farm;
        var owner=this.owner;
        var secret=this.secret;
-       return "http://farm"+farm+".static.flickr.com/"+server_id+"/"+id+"_"+secret+".jpg";
+       var url="http://farm"+farm+".static.flickr.com/"+server_id+"/"+id+"_"+secret;
+       return {
+           medium: url + ".jpg",
+           square: url + "_s.jpg"
+        };
     }
 
     function callBackArray(data)
@@ -60,12 +64,12 @@ function FlickrRequest(lon, lat, term)
 
         var querystring ="SELECT * FROM flickr.photos.search WHERE ";
         querystring += "api_key=\"366d86dbf4972dc70d2d9356065dd652\" ";
-        querystring += "AND lon=\""+this.longitude+"\" ";
-        querystring += "AND lat=\""+this.latitude+"\" ";
         querystring += "AND sort=\"relevance\" ";
         querystring += "AND radius=1 ";
         querystring += "AND min_taken_date=\"0\" ";
-        querystring += "AND text=\""+this.searchterm+"\"";
+        if (this.longitude) querystring += "AND lon=\""+this.longitude+"\" ";
+        if (this.latitude) querystring += "AND lat=\""+this.latitude+"\" ";
+        if (this.searchterm) querystring += "AND text=\""+this.searchterm+"\"";
 
         $.getJSON('http://query.yahooapis.com/v1/public/yql?q='+escape(querystring)+'&format=json&callback=?',callBackArray);
     }

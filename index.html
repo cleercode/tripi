@@ -32,10 +32,13 @@
       </div>
     </div>
     <div id="sidebar">
-      <h1>Taj Mahal</h1>
-      <div class="images"></div>
-      <img src="http://farm1.static.flickr.com/140/399383698_a39c49dd34.jpg" alt="">
-      <p class="description">The Taj Mahal ( /ˈtɑːdʒ/ or /ˈtɑːʒ məˈhɑːl/;[1] Hindi: ताज महल, from Persian/Urdu: تاج محل "crown of buildings", pronounced [ˈt̪aːdʒ mɛˈɦɛl]; also "the Taj") is a mausoleum located in Agra, India. It was built by Mughal emperor Shah Jahan in memory of his third wife, Mumtaz Mahal. The Taj Mahal is widely recognized as "the jewel of Muslim art in India and one of the universally admired masterpieces of the world's heritage."</p>
+      <div id="sidebar_loading">
+        <img src="images/loading.gif" alt="Loading">
+        <p>Loading information</p>
+      </div>
+      <div id="sidebar_results">
+        <div></div>
+      </div>
     </div>
   </div>
 
@@ -53,6 +56,12 @@
       </div>
       <a href="javascript:void(0)" class="remove">Remove</a>
     </li>
+  </script>
+
+  <script type="text/template" id="sidebar-template">
+    <h1 class="name"></h1>
+    <div class="images"></div>
+    <p class="description"></p>
   </script>
 
 </body>

@@ -206,11 +206,19 @@ ul.add_entry_results li.smart_autocomplete_highlight {
   width: 300px;
 }
 
-#sidebar h1 {
+#sidebar_loading {
+  display: none;
+  font-size: 24px;
+  font-weight: lighter;
+  margin-top: 100px;
+  text-align: center;
+}
+
+#sidebar_results h1 {
   font-size: 24px;
 }
 
-#sidebar img {
+#sidebar_results img {
   background: #fff;
   border: 1px solid #ccc;
   border-radius: 3px;
@@ -219,10 +227,20 @@ ul.add_entry_results li.smart_autocomplete_highlight {
   width: 288px;
 }
 
-#sidebar p.description {
+#sidebar_results img.square {
+  margin: 10px 19px 0 0;
+  width: 75px;
+}
+
+#sidebar_results img.square:last-child {
+  margin-right: 0;
+}
+
+#sidebar_results p.description {
   background: #eee;
   border-radius: 3px;
   font-size: 12px;
+  margin-top: 20px;
   padding: 10px;
 }
 
