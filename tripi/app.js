@@ -125,6 +125,18 @@ app.get('/:id', function(req,res) {
     res.render('trip', {
         title: 'Tripi |' + trip.name
       , trip: trip
+      , dateToString: function(date) {
+         var hour = date.getHours()
+           , minute = date.getMinutes()
+           , ap = hour < 12 ? 'am' : 'pm';
+
+        if (hour > 12) hour = hour - 12;
+        if (hour == 0) hour = 12;
+        if (minute < 10) minute = '0' + minute;
+        if (minute == '00') minute = '';
+        else minute = ':' + minute;
+        return hour + minute + ap;
+      }
     })
   });
 });
