@@ -169,6 +169,7 @@ ul.add_entry_results {
   border: 1px solid #ccc;
   border-top: none;
   display: none;
+  width: 478px;
 }
 
 ul.add_entry_results li {
@@ -244,9 +245,32 @@ ul.add_entry_results li.smart_autocomplete_highlight {
   padding: 10px;
 }
 
+.save {
+  background: #87b77c;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  display: block;
+  font-weight: bold;
+  line-height: 1.4;
+  margin-top: 20px;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.save:hover {
+  background: #f2ab00;
+  color: #fff;
+}
+
 footer {
   font-size: 12px;
   margin: 40px auto 20px;
   text-align: center;
   width: 960px;
+}
+
+footer img {
+  margin-top: 10px;
 }

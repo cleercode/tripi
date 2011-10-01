@@ -34,7 +34,20 @@ function autocomplete() {
   });
 
   $('.add_entry_input').smartAutoComplete({
-      source: ['Taj Mahal', 'Great Wall of China', 'Pyramid of Giza', 'Carnegie Mellon University']
+      source: []
+    , typeAhead: true
+    , filter: function(term, source) {
+        var dfd = new $.Deferred()
+          , url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' + term + 
+                  '&types=establishment&location=40,-80&radius=500&sensor=true' +
+                  '&key=AIzaSyAyhFF7BBmfMhRZElunBN1rsfh-UEfohEM';
+        $.getJSON(url, function(data) {
+          dfd.resolve($.map(data.predictions, function(item) {
+            return item.description;
+          }));
+        });
+        return dfd;
+      }
     , resultsContainer: '.add_entry_results'
   }).bind({
       itemFocus: function(item) {
