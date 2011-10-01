@@ -30,18 +30,23 @@ function autocomplete() {
           , url = '/search?query=' + term;
         $.getJSON(url, function(data) {
           dfd.resolve($.map(data.predictions, function(item) {
-            return item.description;
+            item.text = item.description;
+            return item;
           }));
         });
         return dfd;
       }
     , resultsContainer: '.add_entry_results'
+    , resultFormatter: function(res){
+        return '<li><div>'+res.text+'</div><div style="display:none;">'+JSON.stringify(res)+'</div></li>';
+        }
   }).bind({
       itemFocus: function(item) {
-        selected = item.smartAutocompleteData.item && item.smartAutocompleteData.item.innerText;
+        selected = (item.smartAutocompleteData.item)? item.smartAutocompleteData.item: undefined;
       }
     , itemSelect: function(item) {
-        selected = item.smartAutocompleteData.item && item.smartAutocompleteData.item.innerText;
+        console.log(item);
+        selected = (item.smartAutocompleteData.item)? item.smartAutocompleteData.item : "";
         if (selected) addEntryEl('1pm', selected);
         displaySidebar(selected);
       }
@@ -50,8 +55,11 @@ function autocomplete() {
   });
 }
 
-function displaySidebar(location) {
-  var gowalla = 'http://www.tripvvv.com/hacku/jsonparser.php?q=' + location.split(' ').join('+')
+function displaySidebar(loc) {
+  console.log("Displaying sidebar!");
+  var data = $.parseJSON(loc.lastChild.innerHTML);
+  console.log(data);
+  var gowalla = 'http://www.tripvvv.com/hacku/jsonparser.php?q=' + loc.split(' ').join('+')
     , $loading = $('#sidebar_loading')
     , $results = $('#sidebar_results');
 
@@ -92,7 +100,7 @@ $(function() {
   autocomplete();
 
   $('ul.entries').delegate('li', 'click', function() {
-    var location = $(this).find('.location').text();
-    displaySidebar(location);
+    var loc = $(this).find('.location');
+    displaySidebar(loc);
   });
 });
