@@ -258,13 +258,40 @@ ul.add_entry_results li.smart_autocomplete_highlight {
 }
 
 .nearby_header {
+  border-bottom: 1px dotted #ccc;
   font-size: 18px;
   font-weight: lighter;
+  margin: 10px 0 5px;
   padding: 5px 10px;
 }
 
 .nearby_entry {
   padding: 5px 10px
+}
+
+.nearby_entry a.add {
+  border: none;
+  line-height: 18px;
+}
+
+.nearby_entry a.add .add_icon {
+  background: #87b77c url(../images/add.png) 3px 3px no-repeat;
+  border-radius: 3px;
+  color: #fff;
+  display: inline-block;
+  font-size: 16px;
+  margin-right: 5px;
+  text-indent: -9999px;
+  width: 18px;
+  height: 18px;
+}
+
+.nearby_entry a.add:hover .add_icon {
+  background-color: #f2ab00;
+}
+
+.nearby_entry a.add .name {
+  color: #444;
 }
 
 .save_button {
