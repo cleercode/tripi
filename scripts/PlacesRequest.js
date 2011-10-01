@@ -3,16 +3,15 @@
  * HOW TO USE:
  *
  *  Short version:
- *    (new PlacesRequest(long,lat,searchterm)).doQuery(callbackfunction);
+ *    (new PlacesRequest(long,lat)).doQuery(callbackfunction);
  *
  *  Long version:
- *    var req = new FlickRequest(long,lat,searchterm);
+ *    var req = new FlickRequest(long,lat);
  *    var callback = function(urllist){ do something with a list of image urls };
  *    req.doQuery(callback);
  *
  *  long = longitude
  *  lat = latitude
- *  searchterm = some description
  */
 function PlacesRequest(lon, lat)
 {
