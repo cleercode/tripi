@@ -19,17 +19,18 @@ app.configure(function(){
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
   app.set('Google Places key', 'AIzaSyAyhFF7BBmfMhRZElunBN1rsfh-UEfohEM');
-  mongoose.connect('mongodb://localhost/tripi-dev');
 });
 
 app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
   app.set('Domain', 'http://localhost:3000');
+  mongoose.connect('mongodb://localhost/tripi-dev');
 });
 
 app.configure('production', function(){
   app.use(express.errorHandler()); 
-  app.set('Domain', 'http://tripi.com');
+  app.set('Domain', 'http://tripi-noqg6ztz.dotcloud.com');
+  mongoose.connect('mongodb://root:RCSkLwJMdn46l1lWV87E@tripi-NOQG6ZTZ-db-0.dotcloud.com:15650')
 });
 
 var Schema = mongoose.Schema;
@@ -107,5 +108,5 @@ app.get('/:id', function(req,res) {
   });
 });
 
-app.listen(3000);
+app.listen(8080);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

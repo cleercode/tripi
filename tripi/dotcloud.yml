@@ -1,0 +1,7 @@
+www:
+  type: nodejs
+  approot: .
+  environment:
+    NODE_ENV: production
+db:
+  type: mongodb
