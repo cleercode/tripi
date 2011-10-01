@@ -19,17 +19,18 @@ app.configure(function(){
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
   app.set('Google Places key', 'AIzaSyAyhFF7BBmfMhRZElunBN1rsfh-UEfohEM');
-  mongoose.connect('mongodb://localhost/tripi-dev');
 });
 
 app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
   app.set('Domain', 'http://localhost:3000');
+  mongoose.connect('mongodb://localhost/tripi-dev');
 });
 
 app.configure('production', function(){
   app.use(express.errorHandler()); 
-  app.set('Domain', 'http://tripi.com');
+  app.set('Domain', 'http://tripi-noqg6ztz.dotcloud.com');
+  mongoose.connect('mongodb://root:RCSkLwJMdn46l1lWV87E@tripi-NOQG6ZTZ-db-0.dotcloud.com:15650/tripi-prod')
 });
 
 var Schema = mongoose.Schema;
@@ -63,10 +64,20 @@ app.get('/', function(req, res) {
   });
 });
 
-app.get('/search', function(req, res) {
+app.get('/autocomplete', function(req, res) {
   var query = req.param('query')
+    , types = escape('amusement_park|aquarium|art_gallery|bar|beauty_salon|bowling_alley|cafe|campground|casino|church|department_store|establishment|food|hindu_temple|jewelry_store|library|liquor_store|local_government_office|meal_takeaway|mosque|movie_theater|museum|night_club|park|restaurant|shopping_mall|spa|stadium|synagogue|university|zoo')
     , url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' + encodeURIComponent(query) +
-            '&types=establishment&location=40,-80&radius=500&sensor=true&key=' + app.set('Google Places key');
+            '&types=' + types + '&location=40,-80&radius=500&sensor=true&key=' + app.set('Google Places key');
+  request.get(url, function(error, response, body) {
+    res.send(body);
+  });
+});
+
+app.get('/details', function(req, res) {
+  var query = req.param('query')
+    , url = 'https://maps.googleapis.com/maps/api/place/details/json?reference=' + encodeURIComponent(query) + 
+            '&sensor=true&key=' + app.set('Google Places key');
   request.get(url, function(error, response, body) {
     res.send(body);
   });
@@ -107,5 +118,5 @@ app.get('/:id', function(req,res) {
   });
 });
 
-app.listen(3000);
+app.listen(8080);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
