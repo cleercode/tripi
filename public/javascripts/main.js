@@ -72,7 +72,6 @@ function autocomplete() {
 
   $('.add_entry_input').smartAutoComplete({
       source: []
-    , typeAhead: true
     , filter: function(term, source) {
         var dfd = new $.Deferred()
           , url = '/autocomplete?query=' + term;
